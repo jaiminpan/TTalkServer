@@ -17,6 +17,8 @@ using namespace log4cxx;
 
 #define MAX_LOG_LENGTH   1024 * 10
 
+#define LOG4CXX_DEF_NAME   "log4cxx.properties"
+
 class CSLogObject
 {
 public:
@@ -47,9 +49,10 @@ private:
 	LoggerPtr m_logger;
 };
 
-CLog4CXX::CLog4CXX(const char* module_name, int delay) : CSLogObject(module_name, delay)
+CLog4CXX::CLog4CXX(const char* module_name, int delay)
+	: CSLogObject(module_name, delay)
 {
-	PropertyConfigurator::configureAndWatch("log4cxx.properties", delay);
+	PropertyConfigurator::configureAndWatch(LOG4CXX_DEF_NAME, delay);
 	m_logger = Logger::getLogger(module_name);
 }
 
